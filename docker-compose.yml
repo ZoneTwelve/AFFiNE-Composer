@@ -1,0 +1,24 @@
+version: '3.0'
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+      target: dependencies
+    container_name: "affine-app"
+    volumes:
+      - ./app:/usr/src/app
+      - ./app/node_modules:/usr/src/app/node_modules
+      - ./app/apps/web/:/usr/src/app/apps/web/node_modules
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    restart: unless-stopped
+    networks:
+      - affinenet
+    command: npm start
+    #command: sleep 9999
+
+networks:
+  affinenet:
+    external: true
