@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
     networks:
       - affinenet
-    command: pnpm run dev
+    command: pnpm run dev:local
     #command: sleep 9999
 
 networks:
