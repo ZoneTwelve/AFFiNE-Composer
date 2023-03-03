@@ -1,4 +1,4 @@
-version: '3.0'
+version: '3.8'
 
 services:
   app:
@@ -9,14 +9,14 @@ services:
     container_name: "affine-app"
     volumes:
       - ./app:/usr/src/app
-      - ./app/node_modules:/usr/src/app/node_modules
-      - ./app/apps/web/:/usr/src/app/apps/web/node_modules
+      - /usr/src/app/node_modules
+      - /usr/src/app/apps/web/node_modules
     ports:
-      - "${APP_PORT:-3000}:3000"
+      - "${APP_PORT:-3000}:8080"
     restart: unless-stopped
     networks:
       - affinenet
-    command: npm start
+    command: pnpm run dev
     #command: sleep 9999
 
 networks:
